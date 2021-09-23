@@ -1,0 +1,12 @@
+{
+  "name": "meegucrud",
+  "version": "1.0.0",
+  "description": "This is a simple crud about user information",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gabriel Cunha",
+  "license": "ISC"
+}
