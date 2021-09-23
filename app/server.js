@@ -6,7 +6,7 @@ const router = require('./routes')
 const PORT = 8080;
 const HOST = '0.0.0.0';
 
-
+//Conecta e sincroniza o banco de dados com os models atuais
 (async () => {
     const database = require('./db');
     const User = require('./models');

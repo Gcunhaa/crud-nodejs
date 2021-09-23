@@ -18,6 +18,9 @@ router.post('/',checkSchema({
             }
         }
     },
+    document : {
+        isString:{}
+    },
     birthdate:{
         isDate: true,
         custom: {
