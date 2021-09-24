@@ -95,11 +95,33 @@ Para rodar a aplicação basta iniciar o docker-compose
 docker-compose up
 ```
 
-Quando a aplicação começar a rodar, você pode fazer os requests nos endpoints da API http://localhost:8080/api/ , assim como acessar o banco de dados via o PGAdmin http://localhost:5050  
+Quando a aplicação começar a rodar, você pode fazer os requests nos endpoints da API http://localhost:8080/api , assim como acessar o banco de dados via o PGAdmin http://localhost:5050  
+
+### Endpoints
+
+Método | Endpoint | Descrição
+--- | --- | ---
+GET | /users/ | Retorna todos os usuários
+GET | /users?name=$NOME | Retorna todos os usuários com o devido nome
+GET | /users/:id | Retorna usuário com o devido ID
+POST | /users/ | Cria um usuário (Verifique os parametros necessário abaixo da tabela)
+PUT | /users/:id | Atualiza um usuário (Mesmos parametros do POST)
+DELETE | /users/:id | Deleta um usuário do DB
 
 
+Segue os parametros requiridos no body do request para o método POST e PUT:
+```json
+{
+    "name": "Gabriel Cunha",
+    "birthdate": "2001-02-25",
+    "zipcode": "00000000",
+    "acceptedTerms": "true",
+    "accessCount": "0",
+    "document": "2685696850"
+}
+```
 
-## Contact
+## Contato
 
 Gabriel Salomão Cunha - gsalomaoc@gmail.com
 
