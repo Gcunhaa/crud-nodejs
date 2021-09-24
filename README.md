@@ -94,6 +94,21 @@ docker-compose up
 
 Quando a aplicação começar a rodar, você pode fazer os requests nos endpoints da API http://localhost:8080/api , assim como acessar o banco de dados via o PGAdmin http://localhost:5050  
 
+### Testes unitários
+
+Para rodar os testes unitários basta trocar no arquivo Dockerfile de
+
+```docker
+#CMD ["npm", "test"]
+CMD ["npm", "start"]
+```
+para
+```docker
+CMD ["npm", "test"]
+#CMD ["npm", "start"]
+```
+(Caso queira rodar a aplicação normalmente, basta voltar o arquivo para o estado inicial)
+
 ### Endpoints
 
 Método | Endpoint | Descrição
