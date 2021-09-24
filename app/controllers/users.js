@@ -10,8 +10,8 @@ const postUser = async (req, res, next) => {
     const { name, birthdate, document, acceptedTerms, accessCount, zipcode } = req.body;
 
     try {
-        await createUser(name, birthdate, document, acceptedTerms, accessCount, zipcode);
-        res.sendStatus(201);
+        const user = await createUser(name, birthdate, document, acceptedTerms, accessCount, zipcode);
+        res.status(201).send(user);
         next();
     } catch (err) {
         console.log(err.message);
