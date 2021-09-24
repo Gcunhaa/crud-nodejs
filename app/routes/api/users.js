@@ -19,7 +19,7 @@ router.post('/',checkSchema({
         }
     },
     document : {
-        isString: true,
+        isString: true, 
     },
     birthdate:{
         isDate: true,
@@ -49,7 +49,7 @@ router.post('/',checkSchema({
         }
     }
 
-}), users.createUser);
+}), users.postUser);
 
 router.get('/', users.getUsers);
 router.patch('/:id',users.updateUser);
