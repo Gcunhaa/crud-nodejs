@@ -1,5 +1,5 @@
 const { validationResult } = require('express-validator');
-const { createUser, retriveAllUsers, retriveUsersByName, retriveUserById, deleteUserById } = require('../services/users');
+const { createUser, retriveAllUsers, retriveUsersByName, retriveUserById, deleteUserById, updateUserById } = require('../services/users');
 
 const postUser = async (req, res, next) => {
     const errors = validationResult(req);
@@ -46,7 +46,13 @@ const getUsers = async (req, res, next) => {
 }
 
 const updateUser = async (req, res, next) => {
-    res.send('foi');
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { name, birthdate, document, acceptedTerms, accessCount, zipcode } = req.body;
+
 }
 
 const deleteUser = async (req, res, next) => {

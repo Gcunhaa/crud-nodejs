@@ -52,7 +52,7 @@ router.post('/',checkSchema({
 }), users.postUser);
 
 router.get('/', users.getUsers);
-router.patch('/:id',users.updateUser);
+router.put('/:id',users.updateUser);
 router.delete('/:id',users.deleteUser);
 router.get('/:id',users.getUserById);
 
