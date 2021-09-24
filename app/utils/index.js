@@ -15,7 +15,9 @@ function dateDiffInDays(a, b) {
 
 
 const getAdressData = async (zipcode) => {
+    
     const response = await got.get(`https://viacep.com.br/ws/${zipcode}/json/`).json();
+    
     return response;
 }
 

@@ -7,5 +7,6 @@ COPY /app/package*.json ./
 RUN npm install
 
 ADD app .
+#CMD ["npm", "test"]
 
 CMD ["npm", "start"]

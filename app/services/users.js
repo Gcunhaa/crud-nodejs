@@ -4,7 +4,6 @@ const { getAdressData } = require('../utils')
 const createUser = async (name, birthdate, document, acceptedTerms, accessCount, zipcode) => {
     try {
         const addressData = await getAdressData(zipcode);
-
         return await User.create({ name: name, birthdate: birthdate, document: document, acceptedTerms: acceptedTerms, accessCount: accessCount, street: addressData['logradouro'], neighborhood: addressData['bairro'], city: addressData['localidade'], state: addressData['uf'] });
     } catch (e) {
         throw new Error(e.message)
