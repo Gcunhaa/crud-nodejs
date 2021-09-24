@@ -56,7 +56,7 @@ const updateUser = async (req, res, next) => {
     try {
         const operation = await updateUserById(req.params.id, name, birthdate, document, acceptedTerms, accessCount, zipcode);
         if(operation == 1){
-            res.sendStatus(204);
+            res.sendStatus(200).send({ 'success': 'Usuário atualizado com sucesso.' });
         }else {
             res.status(404).send({ 'error': 'Nenhum usuário encontrado.' });
         }
