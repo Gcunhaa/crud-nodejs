@@ -1,5 +1,5 @@
 const { validationResult } = require('express-validator');
-const { createUser, retriveAllUsers, retriveUsersByName } = require('../services/users');
+const { createUser, retriveAllUsers, retriveUsersByName , retriveUserById} = require('../services/users');
 
 const postUser = async (req, res, next) => {
     const errors = validationResult(req);
@@ -26,22 +26,22 @@ const getUsers = async (req, res, next) => {
         return res.status(400).json({ errors: errors.array() });
     }
 
-   
+
     try {
         let users;
 
-        if(!req.query.name){
+        if (!req.query.name) {
             users = await retriveAllUsers();
-        }else{
+        } else {
             users = await retriveUsersByName(req.query.name);
         }
-        
-        if(users.length > 0){
+
+        if (users.length > 0) {
             res.status(200).send(users);
         } else {
-            res.status(404).send({'error':'Nenhum usuário encontrado.'});
+            res.status(404).send({ 'error': 'Nenhum usuário encontrado.' });
         }
-        
+
         next();
     } catch (err) {
         console.log(err.message);
@@ -58,7 +58,26 @@ const deleteUser = async (req, res, next) => {
 }
 
 const getUserById = async (req, res, next) => {
-    res.send("foi");
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+
+    try {
+        const user = await retriveUserById(req.params.id);
+
+        if (user) {
+            res.status(200).send(user);
+        } else {
+            res.status(404).send({ 'error': 'Nenhum usuário encontrado.' });
+        }
+
+        next();
+    } catch (err) {
+        console.log(err.message);
+        res.sendStatus(500) && next(err);
+    }
 }
 
 module.exports = {

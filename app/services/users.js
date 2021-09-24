@@ -29,7 +29,7 @@ const retriveUsersByName = async (name) => {
 
 const retriveUserById = async (id) => {
     try {
-        return await User.findAll({where: {id: id}});
+        return await User.findOne({where: {id: id}});
     } catch (e) {
         throw new Error(e.message)
     }
