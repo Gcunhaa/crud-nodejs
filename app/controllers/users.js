@@ -53,17 +53,11 @@ const updateUser = async (req, res, next) => {
 
     const { name, birthdate, document, acceptedTerms, accessCount, zipcode } = req.body;
 
-}
-
-const deleteUser = async (req, res, next) => {
-
-
     try {
-        const operation = await deleteUserById(req.params.id);
-        
-        if(operation){
-            res.sendStatus(200).send({'success': 'Usuário deletado com sucesso.'});
-        } else{
+        const operation = await updateUserById(req.params.id, name, birthdate, document, acceptedTerms, accessCount, zipcode);
+        if(operation == 1){
+            res.sendStatus(204);
+        }else {
             res.status(404).send({ 'error': 'Nenhum usuário encontrado.' });
         }
         
@@ -72,10 +66,30 @@ const deleteUser = async (req, res, next) => {
         console.log(err.message);
         res.sendStatus(500) && next(err);
     }
+
+}
+
+const deleteUser = async (req, res, next) => {
+
+
+    try {
+        const operation = await deleteUserById(req.params.id);
+
+        if (operation) {
+            res.sendStatus(200).send({ 'success': 'Usuário deletado com sucesso.' });
+        } else {
+            res.status(404).send({ 'error': 'Nenhum usuário encontrado.' });
+        }
+
+        next();
+    } catch (err) {
+        console.log(err.message);
+        res.sendStatus(500) && next(err);
+    }
 }
 
 const getUserById = async (req, res, next) => {
-    
+
     try {
         const user = await retriveUserById(req.params.id);
 

@@ -14,7 +14,6 @@ const createUser = async (name, birthdate, document, acceptedTerms, accessCount,
 const updateUserById = async (id, name, birthdate, document, acceptedTerms, accessCount, zipcode) => {
     try {
         const addressData = await getAdressData(zipcode);
-
         return await User.update({ name: name, birthdate: birthdate, document: document, acceptedTerms: acceptedTerms, accessCount: accessCount, street: addressData['logradouro'], neighborhood: addressData['bairro'], city: addressData['localidade'], state: addressData['uf'] }, { where: { id: id } });
     } catch (e) {
         throw new Error(e.message)
