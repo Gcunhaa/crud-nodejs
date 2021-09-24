@@ -35,4 +35,13 @@ const retriveUserById = async (id) => {
     }
 }
 
-module.exports = { createUser, retriveAllUsers, retriveUserById, retriveUsersByName};
+const deleteUserById = async (id) => {
+    try {
+        return await User.destroy({where: {id: id}});
+    } catch (e) {
+        throw new Error(e.message)
+    }
+}
+
+
+module.exports = { createUser, retriveAllUsers, retriveUserById, retriveUsersByName, deleteUserById};

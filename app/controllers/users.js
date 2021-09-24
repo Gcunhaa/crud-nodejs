@@ -1,5 +1,5 @@
 const { validationResult } = require('express-validator');
-const { createUser, retriveAllUsers, retriveUsersByName , retriveUserById} = require('../services/users');
+const { createUser, retriveAllUsers, retriveUsersByName, retriveUserById, deleteUserById } = require('../services/users');
 
 const postUser = async (req, res, next) => {
     const errors = validationResult(req);
@@ -21,10 +21,6 @@ const postUser = async (req, res, next) => {
 }
 
 const getUsers = async (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
 
 
     try {
@@ -54,16 +50,26 @@ const updateUser = async (req, res, next) => {
 }
 
 const deleteUser = async (req, res, next) => {
-    res.send('foi');
+
+
+    try {
+        const operation = await deleteUserById(req.params.id);
+        
+        if(operation){
+            res.sendStatus(200).send({'success': 'Usuário deletado com sucesso.'});
+        } else{
+            res.status(404).send({ 'error': 'Nenhum usuário encontrado.' });
+        }
+        
+        next();
+    } catch (err) {
+        console.log(err.message);
+        res.sendStatus(500) && next(err);
+    }
 }
 
 const getUserById = async (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
-
-
+    
     try {
         const user = await retriveUserById(req.params.id);
 
